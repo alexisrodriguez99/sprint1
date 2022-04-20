@@ -10,9 +10,12 @@ import { FormsModule } from '@angular/forms';
 import { RegistroComponent } from './registro/registro.component';
 import { ErrorComponent } from './error/error.component';
 import { JuegosComponent } from './juegos/juegos.component';
-import { AhorcadoComponent } from './ahorcado/ahorcado.component';
-import { PreguntadosComponent } from './juegos2022/preguntados/preguntados.component';
-
+ import { PreguntadosComponent } from './juegos2022/preguntados/preguntados.component';
+ import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { NavbarComponent } from './navbar/navbar.component';
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,14 +25,16 @@ import { PreguntadosComponent } from './juegos2022/preguntados/preguntados.compo
      RegistroComponent,
      ErrorComponent,
      JuegosComponent,
-     AhorcadoComponent,
-     PreguntadosComponent
+      PreguntadosComponent,
+      NavbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-     FormsModule
-  ],
+     FormsModule,
+     AngularFireModule.initializeApp(environment.firebaseConfig),
+     AngularFirestoreModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

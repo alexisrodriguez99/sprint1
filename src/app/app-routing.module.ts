@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AhorcadoComponent } from './ahorcado/ahorcado.component';
-import { ErrorComponent } from './error/error.component';
+ import { ErrorComponent } from './error/error.component';
 import { HomeComponent } from './home/home.component';
 import { JuegosComponent } from './juegos/juegos.component';
 import { PreguntadosComponent } from './juegos2022/preguntados/preguntados.component';
