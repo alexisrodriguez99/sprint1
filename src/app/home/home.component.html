@@ -112,15 +112,14 @@
       <div class="col-md-6">
         <div class="h-100 p-5 text-white bg-dark rounded-3">
           <h2>CHAT</h2>
-          <div *ngIf="logedUser == true; else noLoged">
+          <div *ngIf="logedUser == true; else noLogedChat">
             <div class="container-fluid py-5">
                   <button (click)="chat()">ingresar</button>
             </div>
           </div>
-          <ng-template #noLoged>
-            <h2   hidden>
-              <button  disabled>ingresar</button>
-            </h2>
+          <ng-template #noLogedChat>
+              <p>Debe iniciar secion</p>
+              <button type="button" disabled>ingresar</button>
           </ng-template>
       
         </div>
@@ -140,20 +139,7 @@
   </div>
 </main>
 
-
-
-<ul>
-  <li *ngFor="let item of items | async">
-    <input type="text" #updatetext [value]="item.content" />
-    <input type="text" #updatetext [value]="item.fecha" />
-    <input type="text" #updatetext [value]="item.hora" />
-    <button  >Update</button>
-    <button  >Delete</button>
-  </li>
-</ul>
-<input type="text" #newitem />
-<button  (click)="crearMensaje(newitem.value,'dsd')">Add</button>
-<button  >Delete All</button>
+ 
     
   </body>
 </html>
