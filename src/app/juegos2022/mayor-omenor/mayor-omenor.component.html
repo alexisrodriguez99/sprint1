@@ -1,0 +1,33 @@
+<table border="0"  align="center"  >
+    <tr>
+        <th id="titulo" colspan="2">
+            <h1>MAYOR O MENOR</h1>
+        </th>
+    </tr>
+    <tr>
+        <td rowspan="3" >
+            <img src="/assets/img/cartas/oros_{{cartasMostrar}}.jpg"    width="400" height="500"    />
+        </td>
+         <td>
+            <button id="mayor" (click)="mayor()"> MAYOR</button>
+         </td>
+         
+    </tr>
+    
+    <tr>
+        <td  HEIGHT="50"> 
+            <p id="texto">O</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button id="menor" (click)="menor()">MENOR</button> 
+
+        </td>
+    </tr>
+    <tr >
+        <td id="puntos" colspan="2"> 
+            <p>PUNTOS TOTALES={{puntos}}</p>
+        </td>
+    </tr>
+</table>

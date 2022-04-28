@@ -1,0 +1,27 @@
+<table border="0"  align="center"  >
+    <tr>
+        <th id="titulo">
+            <h1>A-H-O-R-C-A-D-O</h1>
+        </th>
+    </tr>
+    <tr>
+        <td  >
+            <img src="/assets/img/{{numFallos}}.png"    width="730" height="500"    />
+        </td>
+         <td>
+             letras incorrectas:
+         </td>
+        <td id="letra-fallada" *ngFor="let fallo of fallos">{{fallo}}-</td>
+    </tr>
+    <tr>
+        <p id="palabra-adivinada-por-ahora">{{palabraAdivinadaPorAhora}}</p>
+    </tr>
+    <tr>
+        <td id="botonera"> 
+            <button *ngFor="let boton of botones" ion-button round small outline
+            (click)="botonClicked(boton)"  
+            [disabled]="boton.precionado"
+            [ngClass]="boton.estado">{{boton.letra}}</button>
+        </td>
+    </tr>
+</table>

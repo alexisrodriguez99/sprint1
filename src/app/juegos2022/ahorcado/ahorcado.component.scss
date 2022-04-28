@@ -1,0 +1,26 @@
+#palabra-adivinada-por-ahora {
+    text-align: center;
+    letter-spacing: 10px;
+    font-size: 24px;
+  }
+   
+  #botonera {
+    text-align: center;
+  }
+  #letra-fallada{
+      color: red;
+  }
+  #titulo{
+      text-align: center;
+  }
+  .boton-letra-acertada {
+    background-color: lightgreen;
+  }
+
+  .boton-letra-no-acertada {
+    background-color: lightcoral;
+  }
+
+  .boton-no-pulsado-aun {
+    background-color: white;
+  }

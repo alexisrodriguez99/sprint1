@@ -111,9 +111,18 @@
     <div class="row align-items-md-stretch">
       <div class="col-md-6">
         <div class="h-100 p-5 text-white bg-dark rounded-3">
-          <h2>Change the background</h2>
-          <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then, mix and match with additional component themes and more.</p>
-          <button class="btn btn-outline-light" type="button">Example button</button>
+          <h2>CHAT</h2>
+          <div *ngIf="logedUser == true; else noLoged">
+            <div class="container-fluid py-5">
+                  <button (click)="chat()">ingresar</button>
+            </div>
+          </div>
+          <ng-template #noLoged>
+            <h2   hidden>
+              <button  disabled>ingresar</button>
+            </h2>
+          </ng-template>
+      
         </div>
       </div>
       <div class="col-md-6">
@@ -132,6 +141,19 @@
 </main>
 
 
+
+<ul>
+  <li *ngFor="let item of items | async">
+    <input type="text" #updatetext [value]="item.content" />
+    <input type="text" #updatetext [value]="item.fecha" />
+    <input type="text" #updatetext [value]="item.hora" />
+    <button  >Update</button>
+    <button  >Delete</button>
+  </li>
+</ul>
+<input type="text" #newitem />
+<button  (click)="crearMensaje(newitem.value,'dsd')">Add</button>
+<button  >Delete All</button>
     
   </body>
 </html>

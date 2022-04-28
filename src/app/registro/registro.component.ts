@@ -15,6 +15,7 @@ export class RegistroComponent implements OnInit {
   constructor(private authSvc: AuthService, private router: Router,private fs:FirestoreService) {}
 
   ngOnInit(): void {
+    
   }
   async onRegister(email:any, password:any) {
       

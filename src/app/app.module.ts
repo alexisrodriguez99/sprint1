@@ -9,13 +9,16 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
 import { RegistroComponent } from './registro/registro.component';
 import { ErrorComponent } from './error/error.component';
-import { JuegosComponent } from './juegos/juegos.component';
- import { PreguntadosComponent } from './juegos2022/preguntados/preguntados.component';
+  import { PreguntadosComponent } from './juegos2022/preguntados/preguntados.component';
  import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { NavbarComponent } from './navbar/navbar.component';
- 
+import { ChatComponent } from './chat/chat.component';
+import { AhorcadoComponent } from './juegos2022/ahorcado/ahorcado.component';
+import { MayorOMenorComponent } from './juegos2022/mayor-omenor/mayor-omenor.component';
+import { JuegosComponent } from './juegos/juegos.component';
+  
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,9 +27,12 @@ import { NavbarComponent } from './navbar/navbar.component';
      QuienSoyComponent,
      RegistroComponent,
      ErrorComponent,
-     JuegosComponent,
-      PreguntadosComponent,
-      NavbarComponent
+        PreguntadosComponent,
+      NavbarComponent,
+      ChatComponent,
+      AhorcadoComponent,
+      MayorOMenorComponent,
+      JuegosComponent
   ],
   imports: [
     BrowserModule,
