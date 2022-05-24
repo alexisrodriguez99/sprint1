@@ -18,7 +18,10 @@ import { ChatComponent } from './chat/chat.component';
 import { AhorcadoComponent } from './juegos2022/ahorcado/ahorcado.component';
 import { MayorOMenorComponent } from './juegos2022/mayor-omenor/mayor-omenor.component';
 import { JuegosComponent } from './juegos/juegos.component';
-  
+import { MiJuegoComponent } from './juegos2022/mi-juego/mi-juego.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ListaPuntosComponent } from './lista-puntos/lista-puntos.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +35,9 @@ import { JuegosComponent } from './juegos/juegos.component';
       ChatComponent,
       AhorcadoComponent,
       MayorOMenorComponent,
-      JuegosComponent
+      JuegosComponent,
+      MiJuegoComponent,
+      ListaPuntosComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +45,8 @@ import { JuegosComponent } from './juegos/juegos.component';
      FormsModule,
      AngularFireModule.initializeApp(environment.firebaseConfig),
      AngularFirestoreModule,
+     HttpClientModule,
+
     ],
   providers: [],
   bootstrap: [AppComponent]

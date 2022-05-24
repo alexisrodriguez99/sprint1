@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthService } from '../services/auth.service';
+import { FirestoreService } from '../services/firestore.service';
 import { User } from '../shared/usert';
 import { Router } from '@angular/router';
  import { AngularFireDatabase,AngularFireObject,AngularFireList  } from '@angular/fire/compat/database';
@@ -14,13 +15,19 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   items: Observable<any[]>;
+  AAA: Observable<any[]>;
   item: any;
    itemsRef: AngularFireList<any>;
 
  
-  constructor(private authServise: AuthService,private router:Router, private db: AngularFireDatabase   ) { 
+  constructor(private authServise: AuthService,private router:Router, private db: AngularFireDatabase,private fire: FirestoreService   ) { 
+     
+    this.AAA=this.fire.obtenerTodos("logs");
+    this.AAA.subscribe(res => console.log(res[0].payload));
+
      
 
+    
      this.items=db.list('item').valueChanges();
     console.log("_______________________");
 
@@ -31,15 +38,12 @@ export class HomeComponent implements OnInit {
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
       )
     );
-    console.log(this.items);
-    
+     
   }
   logedUser:any = null;
   mail:any=null;
   ngOnInit(): void {
-    let f = new Date();
-      //this.crear("otro");
-  //  this.crear("owwo");
+  console.log( this.fire.obtenerTodos("logs"));
     this.estaLogeado();
     
 }
@@ -64,7 +68,11 @@ estaLogeado(){
   })
 }
 juegos(){
-  this.router.navigateByUrl('/juegos');
+  this.router.navigateByUrl('/listaJuegos');
+
+}
+listaPuntos(){
+  this.router.navigateByUrl('/listaPuntos');
 
 }
 chat(){
@@ -72,7 +80,7 @@ chat(){
 
 }
 quienSoy(){
-  this.router.navigateByUrl('/quiensoy');
+  this.router.navigateByUrl('/quienSoy');
 }
 save(newName: string) {
   //this.itemRef.set({ name: newName });

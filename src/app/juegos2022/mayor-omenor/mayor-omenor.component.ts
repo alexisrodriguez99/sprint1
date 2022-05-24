@@ -1,5 +1,8 @@
+import { ArrayType } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../services/auth.service';
+import { FirestoreService } from '../../services/firestore.service';
 
 @Component({
   selector: 'app-mayor-omenor',
@@ -12,11 +15,48 @@ export class MayorOMenorComponent implements OnInit {
   cartaAnterior:number=0;
   cartaNueva:number=0;
   puntos:number=0;
-   constructor() { }
+
+  logedUser:any = null;
+  mail:any=null;
+  usuario:any;
+   constructor(private authServise: AuthService,private firestore: FirestoreService) { }
 
   ngOnInit(): void {
     console.log("sadas" +  Math.floor(Math.random() * this.cartas.length + 100));
     this.inicializar();
+this.estaLogeado();
+    this.firestore.obtenerTodos("usuario").subscribe((repatidor)=>{
+      // this.arrayContainer=[];
+       repatidor.forEach((unRepartidor:any)=>{
+     
+         let lista:any;
+     //if(unRepartidor.estado=="listo sin entregar")
+     lista=unRepartidor.payload.doc.data();
+     if(lista.correo==this.mail){
+       this.usuario=unRepartidor.payload.doc.data();
+     console.log(this.usuario);
+     
+     /*this.arrayContainer.push(unRepartidor.payload.doc.data());
+      console.log(unRepartidor.payload.doc.data());*/
+     }
+       });
+      
+     })
+  }
+  estaLogeado(){
+    this.authServise.isAuth().subscribe(auth =>{
+      if(auth){
+        console.log(auth.uid);
+        console.log(auth.displayName);
+        console.log(auth.email);
+        this.logedUser=true;
+        this.mail=auth.email;
+      }
+      else
+      {
+        this.logedUser=false;
+      }
+    })
   }
   inicializar(): void {
     this.puntos=0;
@@ -41,6 +81,17 @@ export class MayorOMenorComponent implements OnInit {
       this.mensajeRepitio();
     }
     else{
+      let f=new Date();
+      let fecha=f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()
+      /*datosPuntos.push(fecha)
+      datosPuntos.push(this.puntos)  */
+      let datosPuntos:any={fecha:fecha,puntos:this.puntos};
+    
+      this.usuario.mayormenor.push(datosPuntos);
+
+      this.firestore.actualizar('usuario',this.usuario.id,this.usuario).then(()=>{
+      }
+     )
        setTimeout(() => {
        this.mensajePerdio();
      },300);
@@ -60,6 +111,15 @@ export class MayorOMenorComponent implements OnInit {
       this.mensajeRepitio();
      }
      else{
+      let f=new Date();
+      let fecha=f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()
+      /*datosPuntos.push(fecha)
+      datosPuntos.push(this.puntos)  */
+      let datosPuntos:any={fecha:fecha,puntos:this.puntos};
+       this.usuario.mayormenor.push(datosPuntos);
+      this.firestore.actualizar('usuario',this.usuario.id,this.usuario).then(()=>{
+      }
+     )
         setTimeout(() => {
         this.mensajePerdio();
       },300);

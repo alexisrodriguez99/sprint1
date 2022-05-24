@@ -1,0 +1,46 @@
+<div id="fondo"  >
+    <div 
+        id="div"  (click)="precionarCirculo()" style="position: absolute; margin: 200px 2px 20px 100px;" [hidden]="circulos[0]">1
+    </div>
+    <div 
+        id="div"  (click)="precionarCirculo()" style="position: absolute; margin: 500px 2px 20px 150px;" [hidden]="circulos[1]">2
+    </div>
+    <div 
+        id="div"  (click)="precionarCirculo()" style="position: absolute; margin: 500px 2px 20px 760px;" [hidden]="circulos[2]">3
+    </div>
+    <div 
+        id="div"  (click)="precionarCirculo()" style="position: absolute; margin: 125px 2px 20px 275px;" [hidden]="circulos[3]">4
+    </div>
+    <div 
+        id="div"  (click)="precionarCirculo()" style="position: absolute; margin: 300px 2px 20px 900px;" [hidden]="circulos[4]">5
+    </div>
+    <div 
+        id="div"  (click)="precionarCirculo()" style="position: absolute; margin: 200px 2px 20px 800px;" [hidden]="circulos[5]">6
+    </div>
+    <div 
+        id="div"  (click)="precionarCirculo()" style="position: absolute; margin: 50px 2px 20px 1400px;" [hidden]="circulos[6]">7
+    </div>
+    <div 
+        id="div"  (click)="precionarCirculo()" style="position: absolute; margin: 430px 2px 20px 1300px;" [hidden]="circulos[7]">8
+    </div>
+    <div 
+        id="div"  (click)="precionarCirculo()" style="position: absolute; margin: 320px 2px 20px 500px;" [hidden]="circulos[8]">9
+    </div>
+    <div 
+    id="div"  (click)="precionarCirculo()" style="position: absolute; margin: 200px 2px 20px 600px;" [hidden]="circulos[9]">10
+    </div>
+    </div>
+    <div *ngIf="inicio else juego ">
+        <button (click)="iniciar()" disabled>INICIAR</button>
+
+    </div>
+    <ng-template #juego>
+        <div>
+                <button (click)="iniciar()">INICIAR</button>
+    
+        </div>
+
+    </ng-template>
+    <!--<button (click)="iniciar()">INICIAR</button>-->
+    <button (click)="reset()">RESET</button>
+    <h2>PUNTOS: {{puntos}}</h2> <h2>SEGUNDOS: {{segundo}}</h2><h2>FALLOS: {{fallos}}</h2>

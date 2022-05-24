@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../services/auth.service';
+import { FirestoreService } from '../../services/firestore.service';
 
 @Component({
   selector: 'app-ahorcado',
@@ -16,19 +18,60 @@ export class AhorcadoComponent implements OnInit {
 readonly PALABRAS = ["CARACOLA", "TOCINO", "BARCELONA"];
 
 botones: Array<{ letra: string, estado: string, precionado: boolean }>=[];
-
+logedUser:any = null;
+  mail:any=null;
 palabraAdivinadaPorAhora: string="";
 palabraAAdivinar: string="";
 fallos: Array<string>=[];
 numFallos: number=0;
 numAciertos: number=0;
 contadorAlertError: number = 0;
-  constructor() { }
+puntos:number=0;
+usuario:any={clave:'',correo:'',id:'',ahoracado:[],mayormenor:[],mijuego:[],preguntados:[]};
+  constructor(private authServise: AuthService,private fs: FirestoreService,private firestore:FirestoreService) { }
 
   ngOnInit(): void {
     this.inicializar();
+this.estaLogeado();
 
+
+
+this.fs.obtenerTodos("usuario").subscribe((repatidor)=>{
+ // this.arrayContainer=[];
+  repatidor.forEach((unRepartidor:any)=>{
+
+    let lista:any;
+//if(unRepartidor.estado=="listo sin entregar")
+lista=unRepartidor.payload.doc.data();
+if(lista.correo==this.mail){
+  this.usuario=unRepartidor.payload.doc.data();
+console.log(this.usuario);
+
+/*this.arrayContainer.push(unRepartidor.payload.doc.data());
+ console.log(unRepartidor.payload.doc.data());*/
+}
+  });
+ 
+}
+
+)
   }
+  estaLogeado(){
+    this.authServise.isAuth().subscribe(auth =>{
+      if(auth){
+        console.log(auth.uid);
+        console.log(auth.displayName);
+        console.log(auth.email);
+        this.logedUser=true;
+        this.mail=auth.email;
+      }
+      else
+      {
+        this.logedUser=false;
+      }
+    })
+  }
+  
   inicializar(): void {
     this.contadorAlertError=0;    
     this.numFallos = 0;
@@ -66,7 +109,17 @@ botonClicked(boton: { letra: string, estado: string, precionado: boolean}): void
 
             if(this.contadorAlertError==0){
             this.aumentarFallos(boton.letra);
-
+            //this.puntos=0;
+            let f=new Date();
+            let fecha=f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()
+            /*datosPuntos.push(fecha)
+            datosPuntos.push(this.puntos)  */
+            let datosPuntos:any={fecha:fecha,puntos:0};
+             this.usuario.ahoracado.push(datosPuntos);
+console.log(this.usuario);
+            this.firestore.actualizar('usuario',this.usuario.id,this.usuario).then(()=>{
+             }
+            )
             this.mostrarMensajeDePerder();
             this.contadorAlertError++;
             }
@@ -75,6 +128,20 @@ botonClicked(boton: { letra: string, estado: string, precionado: boolean}): void
         boton.precionado=true;
     } else {
       if (this.numAciertos == this.palabraAAdivinar.length) {
+        this.puntos=100-(20*this.numFallos);
+       // alert(this.numFallos);
+
+       let f=new Date();
+       let fecha=f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()
+       /*datosPuntos.push(fecha)
+       datosPuntos.push(this.puntos)  */
+       let datosPuntos:any={fecha:fecha,puntos:this.puntos};
+        this.usuario.ahoracado.push(datosPuntos);
+
+        this.firestore.actualizar('usuario',this.usuario.id,this.usuario).then(()=>{
+          //this.route.navigate(['bienvenido']);
+        }
+        )
           this.mostrarMensajeDeGanar();
       }
       boton.estado = "boton-letra-acertada";
@@ -124,9 +191,11 @@ mostrarMensajeDePerder(): void {
 }
 
 mostrarMensajeDeGanar(): void {
+  this.puntos=100-(20*this.numFallos);
+
     Swal.fire({
   title: 'GANASTE',
-  text: "Pulse repetir para jugar otra vez",
+  text: "Obtuviste "+ this.puntos+" puntos. Pulse repetir para jugar otra vez",
   icon: 'success',
   showCancelButton: true,
   confirmButtonColor: '#3085d6',

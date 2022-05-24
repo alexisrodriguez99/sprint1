@@ -1,1 +1,42 @@
-<p>preguntados works!</p>
+<table border="0"  align="center"  >
+    <tr>
+        <th id="titulo">
+            <h1 id="titulo">PREGUNTADOS </h1>
+        </th>
+    </tr>
+    
+    <tr>
+        <td><p id="pregunta">{{pregunta}}</p></td>
+    </tr>
+    <tr>
+
+        <img [src]="img.hits[indiceImg].previewURL" class="centrado" width="400px" height="200px">
+     </tr>
+    <!--
+                <img src="assets/img/0.png" width="600" height="400" >
+        
+        <tr *ngFor="let respuesta of respurestas"  >
+        <td > 
+            <button  id="botonera"
+             [disabled]="respuesta.precionado"
+            [ngClass]="respuesta.estado">{{respuesta.respuesta}}</button>
+        </td>
+    </tr>-->
+    <tr *ngFor="let reo of reordenado"  >
+        <td > 
+            <button   
+            (click)="seleccionarRespuesta(reo)"
+             [disabled]="reo.precionado"
+            [ngClass]="reo.estado">{{reo.respuesta}}</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button              [disabled]="estadoBoton"
+            (click)="siguiente()">siguiente</button>
+        </td>
+        <td>
+          PUNTOS={{puntos}}
+        </td>
+    </tr>
+</table> 

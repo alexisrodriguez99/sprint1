@@ -1,0 +1,213 @@
+<table border="0" align="center"  >
+    <tr>
+        <th colspan="4" id="titulo" >
+           <h1>Lista de Puntaciones </h1>
+        <h3>(solo los mejores 5)</h3>
+        </th>
+    </tr>
+    <tr>
+       <td>
+           <h2 id="tituloA">AHORCADO</h2>
+       </td>
+       <td>
+           <h2 id="tituloM">MAYOR O MENOR</h2>
+
+       </td>
+        <td>
+           <h2 id="tituloM">MI JUEGO(CLICKER FAST)</h2>
+
+       </td>
+       <td>
+           <h2 id="tituloM">PREGUNTADOS</h2>
+
+       </td>
+    </tr>
+
+    <tr>
+
+
+       <td>
+           <img src="/assets/img/6.png"    width="400" height="500"    />
+       </td>
+
+       <td>
+           <img src="/assets/img/cartas/oros_1.jpg"    width="400" height="500"    />
+       </td>
+
+
+       <td>
+           <img src="/assets/img/10.png"    width="400" height="500"    />
+       </td>
+
+
+     <td>
+           <img [src]="imgPreguntados.hits[0].previewURL"    width="400" height="500"    />
+       </td>
+
+       <td>
+       </td>
+    </tr>
+    <tr>
+       <td >
+        <ol >
+                        <!--AHORACADO-->
+
+            <div *ngFor="let item of usuario.ahoracado; index as i" style="text-align: center;"> 
+                
+                <li *ngIf="i==0" class="puesto{{i}}">
+                
+ 
+                
+                  {{item.puntos}} PTOS || REALIZADO: {{item.fecha}}
+                
+                </li>
+                <li *ngIf="i==1" class="puesto{{i}}">
+                
+ 
+                
+                    {{item.puntos}} PTOS || REALIZADO: {{item.fecha}}
+                  
+                  </li>
+                  <li *ngIf="i==2" class="puesto{{i}}">
+                
+ 
+                
+                    {{item.puntos}} PTOS || REALIZADO: {{item.fecha}}
+                  
+                  </li>
+                  <li *ngIf="i<5 && i>2" class="hola{{i}}">
+                
+ 
+                
+                    {{item.puntos}} PTOS || REALIZADO: {{item.fecha}}
+                  
+                  </li>
+
+            </div>
+            
+        </ol>  
+       </td>
+       <td >
+                        <!--MAYOR MENOR-->
+
+        <ol >
+            <div *ngFor="let item of listamayormenor; index as i" style="text-align: center;"> 
+                
+                <li *ngIf="i==0" class="puesto{{i}}">
+                
+ 
+                
+                  {{item.puntos}} PTOS || REALIZADO: {{item.fecha}}
+                
+                </li>
+                <li *ngIf="i==1" class="puesto{{i}}">
+                
+ 
+                
+                    {{item.puntos}} PTOS || REALIZADO: {{item.fecha}}
+                  
+                  </li>
+                  <li *ngIf="i==2" class="puesto{{i}}">
+                
+ 
+                
+                    {{item.puntos}} PTOS || REALIZADO: {{item.fecha}}
+                  
+                  </li>
+                  <li *ngIf="i<5 && i>2" class="hola{{i}}">
+                
+ 
+                
+                    {{item.puntos}} PTOS || REALIZADO: {{item.fecha}}
+                  
+                  </li>
+
+            </div>
+            
+        </ol>  
+       </td>
+       
+        <td >
+ <ol >
+                 <!--MI JUEGO-->
+
+        <div *ngFor="let item of usuario.mijuego; index as i" style="text-align: center;"> 
+            
+            <li *ngIf="i==0" class="puesto{{i}}">
+            
+
+            
+              {{item.puntos}} % PRECICION || REALIZADO: {{item.fecha}}
+            
+            </li>
+            <li *ngIf="i==1" class="puesto{{i}}">
+            
+
+            
+                {{item.puntos}} % PRECICION  || REALIZADO: {{item.fecha}}
+              
+              </li>
+              <li *ngIf="i==2" class="puesto{{i}}">
+            
+
+            
+                {{item.puntos}} % PRECICION  || REALIZADO: {{item.fecha}}
+              
+              </li>
+              <li *ngIf="i<5 && i>2" class="hola{{i}}">
+            
+
+            
+                {{item.puntos}} % PRECICION  || REALIZADO: {{item.fecha}}
+              
+              </li>
+
+        </div>
+        
+    </ol>  
+       </td>
+       <td >
+        <ol >
+            <!--PREGUNTADOS-->
+            <div *ngFor="let item of usuario.preguntados; index as i" style="text-align: center;"> 
+                
+                <li *ngIf="i==0" class="puesto{{i}}">
+                
+ 
+                
+                  {{item.puntos}} PTOS || REALIZADO: {{item.fecha}}
+                
+                </li>
+                <li *ngIf="i==1" class="puesto{{i}}">
+                
+ 
+                
+                    {{item.puntos}} PTOS || REALIZADO: {{item.fecha}}
+                  
+                  </li>
+                  <li *ngIf="i==2" class="puesto{{i}}">
+                
+ 
+                
+                    {{item.puntos}} PTOS || REALIZADO: {{item.fecha}}
+                  
+                  </li>
+                  <li *ngIf="i<5 && i>2" class="hola{{i}}">
+                
+ 
+                
+                    {{item.puntos}} PTOS || REALIZADO: {{item.fecha}}
+                  
+                  </li>
+
+            </div>
+            
+        </ol>  
+       </td>
+       <td>
+            
+       </td>
+    </tr>
+</table>
+ 
+<router-outlet></router-outlet>

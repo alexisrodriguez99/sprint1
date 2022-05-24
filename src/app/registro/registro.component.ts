@@ -4,6 +4,7 @@ import { AuthService } from './../services/auth.service';
 import { Router } from '@angular/router';
 import { EmailValidator } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-registro',
@@ -12,7 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class RegistroComponent implements OnInit {
 
-  constructor(private authSvc: AuthService, private router: Router,private fs:FirestoreService) {}
+  constructor(private authSvc: AuthService, private router: Router,private fs:FirestoreService,private afs: AngularFirestore) {}
 
   ngOnInit(): void {
     
@@ -29,7 +30,8 @@ export class RegistroComponent implements OnInit {
       else if(user){
      // const isVerified = this.authSvc.isEmailVerified(user);
      // this.redirectUser(isVerified);
-      this.fs.crear('usuario',{correo:email.value,clave:password.value});
+     let idGenerado=this.afs.createId();
+      this.fs.actualizar('usuario',idGenerado,{correo:email.value,clave:password.value,id:idGenerado,ahoracado:[], mayormenor:[],mijuego:[],preguntados:[]    });
       //para guardar en la firestore
      console.log("Entro");
     this.router.navigateByUrl('/home');
